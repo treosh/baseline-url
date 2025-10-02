@@ -1,0 +1,27 @@
+{
+  "name": "baseline-test",
+  "version": "1.0.0",
+  "description": "Test any URL for usage of baseline features",
+  "repository": "https://github.com/treosh/baseline-test",
+  "author": "Aleksey Kulikov <alekseykulikov@me.com>",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "baseline",
+    "puppeteer"
+  ],
+  "scripts": {
+    "test": "prettier -c src/** package.json README.md && tsc -p ."
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
+  }
+}
