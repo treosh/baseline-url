@@ -3,9 +3,8 @@
 > Test a URL to see which [`baseline`](https://web-platform-dx.github.io/web-features/) features are used.
 
 Need to know what are the new web features used by a page?
-Or trying to use [Baseline](https://web-platform-dx.github.io/web-features/) to get clear information on which features are available across browsers?
 
-This library lists all modern features used by a URL, along with their baseline status
+This library lists all modern features used by a URL, along with their [Baseline status](https://web-platform-dx.github.io/web-features/).
 It loads a page with Headless Chrome, requests an internal [`UseCounter API`](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/use_counter_wiki.md), and maps WebDX ids to Baseline features.
 
 ## Usage
