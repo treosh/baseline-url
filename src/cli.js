@@ -1,5 +1,8 @@
+#!/usr/bin/env node
+
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import { testUrl } from './index.js'
 
 // Configure and parse the command-line arguments.
 const argv = yargs(hideBin(process.argv))
@@ -17,7 +20,18 @@ const argv = yargs(hideBin(process.argv))
   .alias('version', 'v')
   .parseSync()
 
-const url = argv._[0]
+const url = /** @type {string} */ (argv._[0])
 const output = argv.o || 'text'
 
-console.log('test %s and output=%s', url, output)
+const features = await testUrl(url)
+if (output === 'json') {
+  console.log(JSON.stringify(features, null, 2))
+} else {
+  console.log('Found %o WebDXFeatures used on %s:', features.length, url)
+  for (const f of features) {
+    console.log('• %s - %o/%o - %s (%s)', f.id, f.status || 'limited', f.chromeUsage || '-', f.desc || '-', f.dxId)
+  }
+}
+
+// console.log('test %s and output=%s', url, output)
+// console.log('Found %o WebDXFeatures used on %s:', dxFeatureIds.length, url)

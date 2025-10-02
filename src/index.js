@@ -36,22 +36,22 @@ export async function testUrl(url) {
   for (const dxFeatureId of dxFeatureIds) {
     const featureId = featuresMapping.get(dxFeatureId)
     if (!featureId) {
-      console.error('Unknown feature id: %s', dxFeatureId)
+      console.error('Error: unknown feature id: %s', dxFeatureId)
       continue
     }
     const feature = /** @type {import('web-features/types.js').FeatureData} */ (webFeatures[featureId])
     if (!feature) {
-      console.error('Missing feature info: %s', featureId)
+      console.error('Error: missing feature info: %s', featureId)
       continue
     }
 
     features.push({
       id: featureId,
+      dxId: dxFeatureId,
       name: feature.name || '-',
       status: feature.status.baseline || 'limited',
-      usage: apiUsage[featureId] ? round(apiUsage[featureId] * 100, 1) : '-',
-      desc: (feature.description || '-').slice(0, 100),
-      dxId: dxFeatureId,
+      desc: feature.description || '-',
+      chromeUsage: apiUsage[featureId] ? round(apiUsage[featureId] * 100, 1) : '-',
     })
   }
   return features

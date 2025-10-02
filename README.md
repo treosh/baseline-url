@@ -6,10 +6,33 @@
 
 ```bash
 # format output as text (useful for quick test)
-npx baseline-test --output=text 'https://treo.sh/'
+npx baseline-test 'https://treo.sh/'
 
  # returns a json with all detected baseline features
 npx baseline-test --output=json 'https://web.dev/' > features.json
+```
+
+Example text output:
+
+```text
+Found 17 WebDXFeatures used on https://treo.sh:
+• nullish-coalescing - 'high'/30.1 - The nullish coalescing (??) and nullish coalescing assignment (??=) operators return (or assign) its (379)
+• not - 'high'/83.7 - The :not() functional pseudo-class matches elements that do not match the selectors in its argument. (343)
+• ua-client-hints - 'limited'/73.7 - The Sec-CH-UA HTTP request header and the navigator.userAgentData API expose browser and platform in (341)
+• request-animation-frame - 'high'/61 - The requestAnimationFrame() method schedules a function that runs before the next repaint. You can u (323)
+• beforeinstallprompt - 'limited'/12.9 - The beforeinstallprompt event fires when a Progressive Web App (PWA) is installable. You can cancel  (303)
+• manifest - 'limited'/21.6 - A web app manifest file provides metadata about the site. The browser can use the metadata to instal (302)
+• layout-instability - 'limited'/38 - The layout-shift performance entry and LayoutShift API measures the layout stability of web pages ba (277)
+• bfcache-blocking-reasons - 'limited'/10.2 - The notRestoredReasons property of a PerformanceNavigationTiming object explains why the current doc (276)
+• fetch-priority - 'low'/30.1 - The fetch() priority option and the fetchpriority HTML attribute give hints to the browser about whi (268)
+• referrer-policy - 'high'/34.6 - The Referrer-Policy HTTP header and referrerpolicy HTML attributes control whether requests have the (260)
+• outline - 'low'/78 - The outline CSS shorthand sets the color, style, and width of a line around an element, outside of t (189)
+• background-clip-text - 'limited'/43.9 - The background-clip: text CSS declaration draws the background underneath only the text in the eleme (131)
+• masks - 'low'/34.6 - The mask CSS property (and several longhand properties) partially or completely hides an element acc (101)
+• webp - 'high'/38.6 - The WebP image format is a raster graphics file format that supports animation, alpha transparency,  (79)
+• js-modules - 'high'/28.3 - JavaScript modules allow code to be organized into reusable units. Modules use import to load other  (47)
+• flexbox - 'high'/82.3 - Flexbox is a one-dimensional layout system, which places content either horizontally or vertically,  (28)
+• accent-color - 'limited'/1.9 - The accent-color CSS property sets a color for checkboxes, radio buttons, and other form controls. (6)
 ```
 
 ## Usage with Node
@@ -19,8 +42,8 @@ import { testUrl } from 'baseline-test'
 
 const features = await testUrl('https://treo.sh/')
 console.table(
-  features.map((f) => ({ ...f, desc: f.desc.slice(0, 50) })),
-  ['id', 'status', 'usage', 'dxId', 'desc'],
+  features.map((f) => ({ ...f, usage: f.chromeUsage, desc: f.desc.slice(0, 50) })),
+  ['id', 'status', 'chromeUsage', 'dxId', 'desc'],
 )
 // output:
 ┌─────────┬──────────────────────────┬─────────┬───────┬──────┬────────────────────────────────────────────────────┐
@@ -44,6 +67,29 @@ console.table(
 │ 15      │ flexbox                  │ high    │ 82.3  │ 28   │ Flexbox is a one-dimensional layout system, which  │
 │ 16      │ accent-color             │ limited │ 1.9   │ 6    │ The accent-color CSS property sets a color for che │
 └─────────┴──────────────────────────┴─────────┴───────┴──────┴────────────────────────────────────────────────────┘
+```
+
+Example of features structure:
+
+```json
+[
+  {
+    "id": "http3",
+    "dxId": 316,
+    "name": "HTTP/3",
+    "status": "low",
+    "desc": "HTTP/3 is a major revision of the HTTP network protocol, providing improved performance and efficiency by using QUIC as the underlying transport protocol.",
+    "chromeUsage": 42.1
+  },
+  {
+    "id": "zstd",
+    "dxId": 291,
+    "name": "Zstandard compression",
+    "status": "limited",
+    "desc": "Zstandard or zstd is fast lossless compression algorithm. When used as a content encoding, it is often faster and offers better compression than brotli.",
+    "chromeUsage": 34.9
+  }
+]
 ```
 
 ## Credits

@@ -418,4 +418,10 @@ const features = {
   kFontLanguageOverride: 411,
 }
 
-export const featuresMapping = new Map(Object.entries(features).map(([key, id]) => [id, kebabCase(key.substring(1))]))
+const keysSpecialMapping = /** @type {Object<string, string>} */ ({
+  kHttp3: 'http3',
+})
+
+export const featuresMapping = new Map(
+  Object.entries(features).map(([key, id]) => [id, keysSpecialMapping[key] || kebabCase(key.substring(1))]),
+)
