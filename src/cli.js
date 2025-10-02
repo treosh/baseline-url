@@ -6,7 +6,7 @@ import { testUrl } from './index.js'
 
 // Configure and parse the command-line arguments.
 const argv = yargs(hideBin(process.argv))
-  .usage('Test a URL for used baseline features')
+  .usage('Test any URL to see which baseline features are used')
   .example("baseline-url -o=json 'https://web.dev/'", 'Get features as JSON')
   .option('o', {
     alias: 'output',
@@ -27,7 +27,7 @@ const features = await testUrl(url)
 if (output === 'json') {
   console.log(JSON.stringify(features, null, 2))
 } else {
-  console.log('Found %o WebDXFeatures used on %s:', features.length, url)
+  console.log('Found %o WebDX Features used on %s:', features.length, url)
   for (const f of features) {
     console.log('• %s - %o/%o - %s (%s)', f.id, f.status || 'limited', f.chromeUsage || '-', f.desc || '-', f.dxId)
   }
