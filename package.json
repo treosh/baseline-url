@@ -2,7 +2,10 @@
   "name": "baseline-url",
   "version": "1.0.0",
   "description": "Test any URL for usage of baseline features",
-  "repository": "https://github.com/treosh/baseline-url",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treosh/baseline-url.git"
+  },
   "author": "Aleksey Kulikov <alekseykulikov@me.com>",
   "license": "MIT",
   "type": "module",
@@ -11,7 +14,7 @@
   },
   "main": "src/index.js",
   "bin": {
-    "baseline-url": "./src/cli.js"
+    "baseline-url": "src/cli.js"
   },
   "files": [
     "src"
