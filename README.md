@@ -1,4 +1,4 @@
-# Baseline Test
+# Baseline URL
 
 > Test any URL for usage of baseline features.
 
@@ -6,10 +6,10 @@
 
 ```bash
 # format output as text (useful for quick test)
-npx baseline-test 'https://treo.sh/'
+npx baseline-url 'https://treo.sh/'
 
  # returns a json with all detected baseline features
-npx baseline-test --output=json 'https://web.dev/' > features.json
+npx baseline-url --output=json 'https://web.dev/' > features.json
 ```
 
 Example text output:
@@ -38,7 +38,7 @@ Found 17 WebDXFeatures used on https://treo.sh:
 ## Usage with Node
 
 ```js
-import { testUrl } from 'baseline-test'
+import { testUrl } from 'baseline-url'
 
 const features = await testUrl('https://treo.sh/')
 console.table(
@@ -92,10 +92,19 @@ Example of features structure:
 ]
 ```
 
+## Useful Links:
+
+- https://www.npmjs.com/package/baseline-browser-mapping
+- https://www.npmjs.com/package/web-features
+- Internal: chrome://histograms/
+- UseCounter Wiki: https://chromium.googlesource.com/chromium/src/+/HEAD/docs/use_counter_wiki.md
+- API: https://chromedevtools.github.io/devtools-protocol/tot/Browser/#method-getHistogram
+- Features mapping: https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/public/mojom/use_counter/metrics/
+
 ## Credits
 
 Sponsored by [Treo.sh - Site speed monitoring made simple](https://treo.sh).
 
-[![](https://github.com/treosh/baseline-test/workflows/CI/badge.svg)](https://github.com/treosh/baseline-test/actions?workflow=CI)
-[![](https://img.shields.io/npm/v/baseline-test.svg)](https://npmjs.org/package/baseline-test)
+[![](https://github.com/treosh/baseline-url/workflows/CI/badge.svg)](https://github.com/treosh/baseline-url/actions?workflow=CI)
+[![](https://img.shields.io/npm/v/baseline-url.svg)](https://npmjs.org/package/baseline-url)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)

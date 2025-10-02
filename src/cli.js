@@ -6,8 +6,8 @@ import { testUrl } from './index.js'
 
 // Configure and parse the command-line arguments.
 const argv = yargs(hideBin(process.argv))
-  .usage('Test any URL for baseline features')
-  .example("baseline-test -o=json 'https://web.dev/'", 'Get features as JSON')
+  .usage('Test a URL for used baseline features')
+  .example("baseline-url -o=json 'https://web.dev/'", 'Get features as JSON')
   .option('o', {
     alias: 'output',
     describe: 'Output format (json or text)',
